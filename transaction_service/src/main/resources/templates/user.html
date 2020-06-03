@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Users page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+</head>
+
+<body>
+    <div class="container my-5">
+    <div th:replace="fragments/header :: header"/>
+        <h3> User Page</h3>
+        <div class="card">
+        	<h6>Enter mobile Id</h6>
+        	<div th:if="${u_war.flag}">
+                        <div class="alert alert-danger">
+                           [[${u_war.message}]]
+            			</div>
+            </div>
+            <div class="card-body">
+                <div class="col-md-10">
+                    <form th:action="@{/viewAccount}">
+						<input type="text" th:name="mobileid"/> 
+						<input type="submit"/> 
+					</form>
+                </div>
+            </div>
+        </div>
+        <div th:replace="fragments/footer :: footer"/>
+    </div>
+</body>
+

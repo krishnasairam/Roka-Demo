@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>Roka Demo Application</title>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header">
+</div>
+
+<div class="container">
+
+    <div class="starter-template">
+        <h2>1. Visit <a th:href="@{/admin}">Admin Page	(If you are Admin(Click Here))</a></h2>
+        <h2>2. Visit <a th:href="@{/user}">User Page	(If you are User(Click Here))</a></h2>
+        <h2>3. Visit <a th:href="@{/about}">About	(Information about this applicaion)</a></h2>
+    </div>
+
+</div>
+<!-- /.container -->
+
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>

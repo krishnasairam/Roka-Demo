@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Shopping cart</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+</head>
+
+<body class="container">
+
+	<div th:replace="fragments/header :: header"/>
+    <table class = "table">
+	<tr>
+    	<th>MobileId</th>
+    	<th>account</th>
+    	<th>wallet</th>
+    	<th>Add wallet</th>
+    	<th>Cart</th>
+	</tr>
+
+	<tr th:object="${userAccounts}">
+    <td th:text="${userAccounts.mobile}"></td>
+    <td th:text="${userAccounts.account}"></td>
+    <td th:text="${userAccounts.wallet}"></td>
+	<td>
+        <div class="card">
+        	<h6>Add Amount into your Wallet</h6>
+        	<div th:if="${w_war.flag}">
+                        <div class="alert alert-danger">
+                           [[${w_war.message}]]
+            			</div>
+            </div>
+            <div class="card-body">
+                <div class="col-md-10">
+                    <form th:action="@{/addwallet/{id}(id=${userAccounts.mobile})}">
+						<input type="text" th:name="wallet"/> 
+						<input type="submit"/> 
+					</form>
+                </div>
+            </div>
+        </div>
+    </td>
+    <td>
+       <a th:href="@{/viewcart/{id}(id=${userAccounts.mobile})}" class="btn btn-primary">
+               <i class="fas fa-shopping-cart"></i>
+        </a>
+    </td>
+	</tr>
+</table>
+
+<div th:fragment="products">
+    <div class="panel-default well" th:each="product : ${products}">
+    	<img th:src="@{${'/images/' + product.name + '.png'}}" width="150" height="150"/>
+        <div class="panel-heading">
+            <h3 th:text="${product.name}"></h3>
+        </div>
+        <h5 th:text="${product.description}" class="panel-body">Description</h5>
+        <div class="row panel-footer">
+            <div th:inline="text" class="col-md-2">Price: ₹ [[${product.price}]] </div>
+            <div th:inline="text" class="col-md-9">In Stock: [[${product.quantity}]]</div>
+            <div th:if="${p_war.flag}">
+                        <div class="alert alert-danger">
+                           [[${p_war.message}]]
+                        </div>
+            </div>
+            <a th:href="@{/buyproduct/{id}/price/{price}/name/{name}(id=${userAccounts.mobile},price=${product.price},name=${product.name})}" th:if="${product.quantity}>0">
+                <button type="button" class="btn btn-primary" th:text="Buy">Buy</button>
+            </a>
+        </div>
+        <br></br>
+    </div>
+</div>
+    
+    
+   <div th:replace="fragments/footer :: footer"/>
+    
+</body>
+
+</html>

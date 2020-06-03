@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>All Products in the cart</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+</head>
+
+<body>
+<div th:replace="fragments/header :: header"/>
+    <div class="container my-2">
+    <h3>Products in the cart</h3>
+    <div class="card">
+    <div class="card-body">
+        <div th:switch="${cart}" class="container my-6">
+            <div class="col-md-12">
+                <h2 th:case="null">No record found !!</h2>
+                <div th:case="*">
+                    <table class="table table-striped table-responsive-md">
+                        <thead>
+                            <tr>
+                            	<th>MobileId</th>
+                                <th>ProductName</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="tran : ${cart}">
+                            	<td th:text="${tran.mobileid}"></td>
+                                <td th:text="${tran.productname}"></td>
+                                <td th:text="${tran.price}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+ 
+        		<div th:replace="fragments/footer :: footer"/>
+    </div>
+</body>
+
+</html>
